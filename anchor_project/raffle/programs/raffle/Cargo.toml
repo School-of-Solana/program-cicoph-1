@@ -1,0 +1,30 @@
+[package]
+name = "raffle"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "raffle"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+anchor-debug = []
+custom-panic = []
+custom-heap = []
+
+[dependencies]
+anchor-lang = {version = "0.32.1", features = ["init-if-needed"]}
+anchor-spl = "0.32.1"
+bytemuck = { version = "1.4.0", features = ["derive", "min_const_generics"]}
+arrayref = "0.3.6"
+solana-keccak-hasher = "2.0"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(target_os, values(\"solana\"))"] }
