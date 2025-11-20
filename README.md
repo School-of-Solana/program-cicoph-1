@@ -13,6 +13,7 @@ This task consists of two parts:
 2. **Frontend**
     - A simple frontend to interact with the dApp.
 
+
 ### Requirements
 - An Anchor program deployed on **Devnet** or **Mainnet**.
 - The Anchor program must use a PDA (Program Derived Address).
