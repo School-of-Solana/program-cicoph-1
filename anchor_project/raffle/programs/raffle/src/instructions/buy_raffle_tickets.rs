@@ -7,16 +7,16 @@ pub fn handle_buy_raffle_tickets(ctx: Context<BuyTickets>, amount: u32) -> Resul
 
     let clock: Clock = Clock::get()?;
 
+    if clock.unix_timestamp > end_timestamp {
+        return Err(error!(RaffleError::RaffleEnded));
+    }
+
     // Read raffle data before mut borrow
     let raffle_key = ctx.accounts.raffle.key();
     let ticket_price = ctx.accounts.raffle.ticket_lamports_price;
     let end_timestamp = ctx.accounts.raffle.end_timestamp;
     let authority_fee_percent = ctx.accounts.raffle.authority_fee_percent;
     let current_accumulated_fees = ctx.accounts.raffle.accumulated_fees;
-
-    if clock.unix_timestamp > end_timestamp {
-        return Err(error!(RaffleError::RaffleEnded));
-    }
 
     msg!("Amount: {} tickets", amount);
 
